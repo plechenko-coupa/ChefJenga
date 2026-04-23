@@ -1,0 +1,5 @@
+name 'base'
+description 'Base cookbook with shared helpers and utilities'
+version '1.0.0'
+chef_version '>= 18.0'
+supports 'ubuntu'

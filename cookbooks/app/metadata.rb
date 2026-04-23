@@ -1,0 +1,5 @@
+name 'app'
+description 'Application cookbook with sample app and webserver'
+version '1.0.0'
+supports 'ubuntu'
+depends 'base'

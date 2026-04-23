@@ -1,0 +1,41 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 100
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/ModuleLength:
+  Max: 200
+
+Layout/EndOfLine:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: "[]"
+    "%i": "[]"
+    "%w": "[]"
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+Lint/RedundantCopDisableDirective:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - Policyfile*.rb
+    - Gemfile

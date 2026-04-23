@@ -1,0 +1,7 @@
+inherit_from: .rubocop.yml
+
+Chef/Modernize/DefaultActionFromInitialize:
+  Enabled: false
+
+Chef/Modernize/DefinesChefSpecMatchers:
+  Enabled: false
