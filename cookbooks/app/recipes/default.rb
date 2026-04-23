@@ -1,7 +1,7 @@
 # Include base cookbook for shared helpers
 include_recipe 'base::default'
 
-# Install common utilities (duplicated across sections)
+# Install common utilities
 package 'curl' do
   action :install
 end
@@ -112,10 +112,13 @@ service 'nginx' do
   action [:enable, :start]
 end
 
-# Install additional nginx common packages
+# Install additional packages
 package 'curl' do
   action :install
 end
 package 'wget' do
+  action :install
+end
+package 'unzip' do
   action :install
 end
