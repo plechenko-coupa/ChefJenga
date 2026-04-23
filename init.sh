@@ -4,13 +4,18 @@ export GEM_HOME="$HOME/.gem"
 export PATH="$GEM_HOME/bin:/opt/chef/bin:$PATH"
 export CHEF_LICENSE=accept
 
+SCRIPT_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
+
 jenga_converge() {
   echo "Converging..."
-  sudo chef-client -z -c .chef/config.rb -o "recipe[jenga::default]"
+  chef_dir="$SCRIPT_DIR/.chef"
+  mkdir -p "$chef_dir"
+  sudo chef-client -z --config-option log_location="$chef_dir/chef-client.log" --config-option cache_path="$chef_dir" -o jenga
+  [[ -f "$chef_dir/cache/chef-stacktrace.out" ]] && sudo chmod a+r "$chef_dir/cache/chef-stacktrace.out"
 }
 jenga_test() {
   echo "Running tests..."
-  curl http://localhost:8080/ && sudo /opt/chef/bin/inspec exec tests || echo 'Failed to connect to http://localhost:8080. Nothing to check'
+  curl http://localhost:8080/ && /opt/chef/bin/inspec exec "$SCRIPT_DIR/tests" || echo 'Failed to connect to http://localhost:8080. Nothing to check'
 }
 
 jenga_commit() {
