@@ -5,9 +5,15 @@
   "build": {
     "dockerfile": "Dockerfile",
   },
+  "containerEnv": {
+    "GEM_HOME": "${containerWorkspaceFolder}/.gem"
+  },
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder}/workspace,target=/workspace,type=bind,consistency=cached",
-  "postCreateCommand": "${containerWorkspaceFolder}/init.sh",
+  "postCreateCommand": [
+    "${containerWorkspaceFolder}/init.sh",
+    "bundler install"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
