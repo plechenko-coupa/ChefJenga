@@ -3,3 +3,4 @@ Gemfile.lock
 inspec.lock
 .chef_cache
 .chef/*
+.gem/*

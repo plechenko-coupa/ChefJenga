@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 export GEM_HOME="$HOME/.gem"
-export PATH="$GEM_HOME/bin:/opt/chef/bin:$PATH"
-export CHEF_LICENSE=accept
+export PATH="$GEM_HOME/bin:$PATH"
 
 SCRIPT_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 

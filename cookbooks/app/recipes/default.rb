@@ -65,6 +65,7 @@ file "#{node['app']['app_home']}/index.html" do
       Hostname: #{node['hostname']}
       IP Address: #{node['ipaddress']}
       Last Chef Run: #{Time.now}
+      Last Chef PID: #{Process.pid}
       </pre>
     </body>
     </html>

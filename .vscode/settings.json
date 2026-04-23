@@ -8,7 +8,7 @@
     "**/CVS": true,
     "**/.ruby-lsp": true,
     "**/.gem": true,
-    "**/.chef/cache": true,
+    ".chef/cache/cookbooks": true,
   },
   "files.watcherExclude": {
     ".git/objects/**": true,
@@ -17,6 +17,7 @@
     "*/.git/objects/**": true,
     "*/.git/subtree-cache/**": true,
     "*/.hg/store/**": true,
+    "**/.gem": true,
     "**/.chef/cache": true,
   },
   "search.exclude": {
@@ -27,6 +28,7 @@
     "**/vendor": true,
     "**/log": true,
     "**/tmp": true,
+    "**/.gem": true,
     "**/.chef/cache": true,
   },
   "editor.tabSize": 2,
