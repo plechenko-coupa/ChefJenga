@@ -18,7 +18,7 @@ It mirrors physical Jenga:
 - All players share a single stack of blocks.
   - Stack - codebase with Chef cookbook(s)
   - Block - a unit of code or functionality (recipe/resource/helper/attribute/etc.).
-- Each turn removes one block and adds another on top. Each turn is time-boxed.
+- Each turn removes one block and adds another on top.
 - The stack must remain standing (convergent and functionally identical to initial state) after each turn.
 - If the stack falls, the next turn is to repair the stack to the working state, or to revert the changes.
 
@@ -40,18 +40,13 @@ A turn without all actions above is invalid and will not be counted.
 
 Each turn includes the following steps:
 
-1. Analyze - What is the change scope and risk? The change must be meaningful, yet small enough to complete within the time limit.
+1. Analyze - What is the change scope and risk? The change must be meaningful, yet small enough to complete quickly.
 2. Implement - Remove one block of code and add a replacement block.
 3. Converge - Converge the stack to verify it remains standing (use `jenga_converge` command).
 4. Verify - Verify the expected behavior remains intact (use `jenga_test` command).
 5. Commit - Commit completed change with meaningful message (use `jenga_commit` command).
 
 Driver may repeat implement, converge, and verify steps as needed before final commit. Once the change is done, the driver commits it to mark the turn as complete and ready for facilitator recording and verification.
-
-## Turn Timing Rule
-
-Each turn is time-limited.
-If timer expires before final verification and commit, facilitator marks turn according to failure-handling rules.
 
 ## Meaningful Change Definition
 
