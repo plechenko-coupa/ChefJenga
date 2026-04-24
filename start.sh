@@ -52,4 +52,4 @@ json="{\"hostPath\":\"${ws_host_path//\\/\\\\}\"}"
 hex=$(printf '%s' "$json" | xxd -p | tr -d '\n')
 uri="vscode-remote://dev-container+${hex}/workspace"
 
-code --folder-uri "$uri" --add "$script_dir"
+code --folder-uri "$uri"
