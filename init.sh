@@ -1,17 +1,33 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
+JENGA_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
 jenga_converge() {
   echo "Converging..."
-  chef_dir="$SCRIPT_DIR/.chef"
+  chef_dir="$JENGA_DIR/.chef"
   mkdir -p "$chef_dir"
-  sudo chef-client -z --config-option log_location="$chef_dir/chef-client.log" --config-option cache_path="$chef_dir" -o jenga
+  log_file="$chef_dir/chef-client-$(date +%Y%m%d%H%M%S).log"
+  st_file="$chef_dir/cache/chef-stacktrace.out"
+  sudo rm -f "$st_file"
+  sudo chef-client -z --config-option cache_path="$chef_dir" -o jenga | tee "$log_file"
+  echo "Log file: '$log_file'" >&2
   [[ -f "$chef_dir/cache/chef-stacktrace.out" ]] && sudo chmod a+r "$chef_dir/cache/chef-stacktrace.out"
 }
+
+jenga_lint() {
+  (
+    cd "$JENGA_DIR" || exit
+    echo 'Running Linter...'
+    bundle exec cookstyle -c .cookstyle.yml --format simple .
+  )
+}
+
 jenga_test() {
-  echo "Running tests..."
-  curl http://localhost:8080/ && /opt/chef/bin/inspec exec "$SCRIPT_DIR/tests" || echo 'Failed to connect to http://localhost:8080. Nothing to check'
+  (
+    cd "$JENGA_DIR" || exit
+    echo "Running tests..."
+    curl http://localhost:8080/ && /opt/chef/bin/inspec exec tests || echo 'Failed to connect to http://localhost:8080. Nothing to check'
+  )
 }
 
 jenga_commit() {

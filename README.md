@@ -43,7 +43,7 @@ Each turn includes the following steps:
 1. Analyze - What is the change scope and risk? The change must be meaningful, yet small enough to complete quickly.
 2. Implement - Remove one block of code and add a replacement block.
 3. Converge - Converge the stack to verify it remains standing (use `jenga_converge` command).
-4. Verify - Verify the expected behavior remains intact (use `jenga_test` command).
+4. Verify - Verify the expected behavior remains intact (use `jenga_lint` and `jenga_test` commands).
 5. Commit - Commit completed change with meaningful message (use `jenga_commit` command).
 
 Driver may repeat implement, converge, and verify steps as needed before final commit. Once the change is done, the driver commits it to mark the turn as complete and ready for facilitator recording and verification.
@@ -54,10 +54,12 @@ A change is meaningful when it improves structure, maintainability, or behavior 
 
 ### Examples of meaningful removals
 
+- Remove a code offense flagged by the linter (use `jenga_lint` command).
 - Remove a hardcoded value.
 - Remove duplicate resource blocks.
 - Remove inline file/script content.
 - Remove complex logic from attributes and recipes.
+- Fix a bug or remove a workaround.
 
 ### Examples of meaningful additions
 
