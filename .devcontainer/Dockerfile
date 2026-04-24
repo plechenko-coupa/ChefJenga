@@ -14,7 +14,7 @@ RUN $SCRIPTS_DIR/proxy_certificate.sh
 ARG CHEF_VERSION=latest
 RUN curl -fsSL https://omnitruck.chef.io/install.sh | bash -s -- -v "$CHEF_VERSION"
 ENV CHEF_LICENSE=accept
-ENV PATH="/opt/chef/bin:$PATH"
+ENV PATH="/opt/chef/bin:/opt/chef/embedded/bin:$PATH"
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu-nopasswd
 USER ubuntu
