@@ -46,5 +46,5 @@ if [[ ! -f "$HOME/.bash_aliases" ]]; then
   echo 'Setting up the environment for Chef Jenga...' >&2
   echo "source '${BASH_SOURCE[0]}'" >>"$HOME/.bash_aliases"
   echo "Installing dependencies into $GEM_HOME..." >&2
-  bundle install --prefer-local
+  ( cd "$JENGA_DIR" && bundle install --prefer-local )
 fi

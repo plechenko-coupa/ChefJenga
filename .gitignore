@@ -4,3 +4,4 @@ inspec.lock
 .chef_cache
 .chef/*
 .gem/*
+nodes/*
