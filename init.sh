@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-export GEM_HOME="$HOME/.gem"
-export PATH="$GEM_HOME/bin:$PATH"
-
 SCRIPT_DIR="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 
 jenga_converge() {
@@ -27,4 +24,11 @@ jenga_commit() {
   git commit -m "Jenga turn: $commit_message"
 }
 
-[[ -f "$HOME/.bash_aliases" ]] || (echo "source '${BASH_SOURCE[0]}'" >>~/.bash_aliases)
+if [[ ! -f "$HOME/.bash_aliases" ]]; then
+  # It is unlikely that ~/.bash_aliases exists in the Dev Container,
+  # so we are assuming that it is a fresh environment
+  echo 'Setting up the environment for Chef Jenga...' >&2
+  echo "source '${BASH_SOURCE[0]}'" >>"$HOME/.bash_aliases"
+  echo "Installing dependencies into $GEM_HOME..." >&2
+  bundle install --prefer-local
+fi
