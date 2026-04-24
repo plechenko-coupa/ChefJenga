@@ -2,8 +2,27 @@
 
 set -euo pipefail
 
-script_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
+if ! command -v git &> /dev/null; then
+  echo "Error: Git is not installed or not in the system PATH."
+  exit 1
+fi
 
+if ! command -v code &> /dev/null; then
+  echo "Error: Visual Studio Code is not installed or not in the system PATH."
+  exit 1
+fi
+
+if ! command -v xxd &> /dev/null; then
+  echo "Error: xxd is not installed or not in the system PATH."
+  exit 1
+fi
+
+if ! command -v docker &> /dev/null; then
+  echo "Error: Docker is not installed or not in the system PATH."
+  exit 1
+fi
+
+script_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")")"
 ws_dir="$script_dir/workspace"
 
 if [[ -d "$ws_dir" ]]; then
@@ -27,5 +46,4 @@ json="{\"hostPath\":\"${ws_host_path//\\/\\\\}\"}"
 hex=$(printf '%s' "$json" | xxd -p | tr -d '\n')
 uri="vscode-remote://dev-container+${hex}/workspace"
 
-code "$script_dir"
-code --folder-uri "$uri" --new-window
+code --folder-uri "$uri" --add "$script_dir"
