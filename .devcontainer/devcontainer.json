@@ -1,9 +1,8 @@
 {
-  // "name": "CWP Dev Container",
-  // "remoteUser": "vscode",
+  "name": "Chef Jenga",
   "remoteUser": "ubuntu",
   "build": {
-    "dockerfile": "Dockerfile",
+    "dockerfile": "Dockerfile"
   },
   "remoteEnv": {
     "GEM_HOME": "/tmp/.gem",
