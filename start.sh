@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# This script starts up Chef Jenga:
+# - Checks for the required dependencies (Git, Visual Studio Code, xxd, Docker).
+# - Clones the workspace branch of the repository if it doesn't exist, or fetches updates from the remote if it does.
+# - Creates a new branch for the workspace with a timestamp (ws/YYYYMMDD_HHMMSS).
+# - Opens the Chef Jenga in Visual Studio Code and workspace in Dev Container
+
 set -euo pipefail
 
 if ! command -v git &> /dev/null; then
